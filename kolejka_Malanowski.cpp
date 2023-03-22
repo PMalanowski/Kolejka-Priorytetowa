@@ -21,18 +21,28 @@ class prio_queue
         }
 
         void peek(){
-            int index = maxPrioIndex();
-            cout << "Element o najwyzszym priorytecie(" << pq[index].prio << ") ma wartosc " << pq[index].value << endl;
+            if(!is_empty()){
+                int index = maxPrioIndex();
+                cout << "Element o najwyzszym priorytecie(" << pq[index].prio << ") ma wartosc " << pq[index].value << endl;
+            }
+            else {
+                cout << "Nie mozna wyswietlc elementu bo kolejka jest pusta." << endl;
+            }
         }
 
         void dequeue(){
-            int index = maxPrioIndex();
-            cout << "Usunieto element o wartosci: " << pq[index].value << " i priorytecie: " << pq[index].prio << endl;
+            if(!is_empty()){
+                int index = maxPrioIndex();
+                cout << "Usunieto element o wartosci: " << pq[index].value << " i priorytecie: " << pq[index].prio << endl;
 
-            for (int i = index; i < size; i++){
-                pq[i] = pq[i+1];
+                for (int i = index; i < size; i++){
+                    pq[i] = pq[i+1];
+                }
+                size--;
             }
-            size--;
+            else {
+                cout << "Nie mozna usunac elementu bo kolejka jest pusta." << endl;
+            }
         }
     private:
         int size;
@@ -53,6 +63,14 @@ class prio_queue
 
             return index;
         }
+        bool is_empty(){
+            if(size == -1){
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
     
 
 };
@@ -62,6 +80,7 @@ int main()
 {
     prio_queue pq;
     
+    pq.peek();
     pq.enqueue(20,1);
     pq.enqueue(25,2);
     pq.enqueue(30,3);
